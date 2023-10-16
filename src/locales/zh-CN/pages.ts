@@ -94,4 +94,16 @@ export default {
   'pages.system.user.form.created_at': '创建时间',
   'pages.system.user.form.updated_at': '更新时间',
   // profile
+  'pages.user.profile.tab.basic': '基本信息',
+  'pages.user.profile.tab.security': '安全设置',
+  'pages.user.profile.tab.security.form.old_password': '旧密码',
+  'pages.user.profile.tab.security.form.old_password.placeholder': '请输入旧密码',
+  'pages.user.profile.tab.security.form.old_password.required': '旧密码是必填项！',
+  'pages.user.profile.tab.security.form.password': '新密码',
+  'pages.user.profile.tab.security.form.password.placeholder': '请输入新密码',
+  'pages.user.profile.tab.security.form.password.required': '新密码是必填项！',
+  'pages.user.profile.tab.security.form.confirm_password': '确认密码',
+  'pages.user.profile.tab.security.form.confirm_password.placeholder': '请确认新密码',
+  'pages.user.profile.tab.security.form.confirm_password.required': '确认密码是必填项！',
+  'pages.user.profile.tab.security.form.confirm_password.validator': '两次输入的密码不匹配！',
 };

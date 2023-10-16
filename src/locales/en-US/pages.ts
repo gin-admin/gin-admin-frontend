@@ -95,4 +95,19 @@ export default {
   'pages.system.user.form.status.freezed': 'Freezed',
   'pages.system.user.form.created_at': 'Created At',
   'pages.system.user.form.updated_at': 'Updated At',
+  // profile
+  'pages.user.profile.tab.basic': 'Basic Information',
+  'pages.user.profile.tab.security': 'Security Settings',
+  'pages.user.profile.tab.security.form.old_password': 'Old Password',
+  'pages.user.profile.tab.security.form.old_password.placeholder': 'Please enter your old password',
+  'pages.user.profile.tab.security.form.old_password.required': 'Old password is required!',
+  'pages.user.profile.tab.security.form.password': 'New Password',
+  'pages.user.profile.tab.security.form.password.placeholder': 'Please enter your new password',
+  'pages.user.profile.tab.security.form.password.required': 'New password is required!',
+  'pages.user.profile.tab.security.form.confirm_password': 'Confirm Password',
+  'pages.user.profile.tab.security.form.confirm_password.placeholder':
+    'Please confirm your new password',
+  'pages.user.profile.tab.security.form.confirm_password.required': 'Confirm password is required!',
+  'pages.user.profile.tab.security.form.confirm_password.validator':
+    'The two passwords that you entered do not match!',
 };

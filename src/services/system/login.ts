@@ -67,3 +67,12 @@ export async function getCurrentUser(options?: { [key: string]: any }) {
     ...(options || {}),
   });
 }
+
+/** Change current user info PUT /api/v1/current/user */
+export async function updateCurrentUser(body: API.User, options?: { [key: string]: any }) {
+  return request<API.ResponseResult<any>>('/api/v1/current/user', {
+    method: 'PUT',
+    data: body,
+    ...(options || {}),
+  });
+}

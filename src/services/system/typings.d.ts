@@ -27,6 +27,7 @@ declare namespace API {
   type UpdateLoginPassword = {
     /** New password (md5 hash) */
     new_password: string;
+    confirm_password?: string;
     /** Old password (md5 hash) */
     old_password: string;
   };

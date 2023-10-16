@@ -51,7 +51,7 @@
     ],
   },
   {
-    path: '/account/center',
+    path: '/account/profile',
     name: 'account.center',
     component: './user/Profile',
     hideInMenu: true,
