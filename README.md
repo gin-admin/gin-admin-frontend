@@ -4,6 +4,8 @@
 
 ## Environment Prepare
 
+- Node.js v16.20.2
+
 ```bash
 npm install
 ```
