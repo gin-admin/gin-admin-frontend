@@ -24,13 +24,17 @@ const MenuForm: React.FC<MenuFormProps> = (props: MenuFormProps) => {
       layout="horizontal"
       grid={true}
       submitter={false}
-      initialValues={{ type: 'page', sequence: 0, statusChecked: true, properties: '{}' }}
+      initialValues={{ type: 'page', sequence: 0, statusChecked: true, properties: '{\n\n}' }}
     >
-      <ProForm.Group title={intl.formatMessage({ id: 'pages.system.menu.resource.form.basic' })}>
+      <ProForm.Group
+        title={intl.formatMessage({ id: 'pages.system.menu.resource.form.basic' })}
+        rowProps={{ gutter: 20 }}
+      >
         <ProFormText
           disabled
           name="parent_name"
           label={intl.formatMessage({ id: 'pages.system.menu.form.parent_name' })}
+          placeholder=""
           colProps={{ span: 12 }}
         />
         <ProFormRadio.Group

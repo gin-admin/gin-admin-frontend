@@ -1,8 +1,7 @@
 export default {
   'pages.layouts.userLayout.title':
-    'A lightweight, flexible, elegant and full-featured RBAC scaffolding based on GIN + GORM 2.0 + Casbin 2.0 + Wire DI',
+    'A lightweight, flexible, elegant and full-featured RBAC scaffolding based on GIN + GORM 2.0 + Casbin 2.0 + Wire DI.',
   'pages.login.accountLogin.tab': 'Account Login',
-  'pages.login.accountLogin.errorMessage': 'Incorrect username/password',
   'pages.login.failure': 'Login failed, please try again!',
   'pages.login.success': 'Login successful!',
   'pages.login.username.placeholder': 'Username',
@@ -18,7 +17,7 @@ export default {
   'pages.login.registerAccount': 'Register Account',
   'pages.welcome.link': 'Welcome',
   'pages.welcome.alertMessage':
-    'A more concise, efficient, and modular Golang Admin service has been released.',
+    'A more concise, efficient, and modular golang admin service has been released.',
   'pages.table.column.operation': 'Operation',
   // menu
   'pages.system.menu.add': 'Add Menu',
@@ -42,6 +41,7 @@ export default {
   'pages.system.menu.form.description': 'Description',
   'pages.system.menu.form.properties': 'Properties',
   'pages.system.menu.form.parent_name': 'Parent',
+  'pages.system.menu.form.created_at': 'Created At',
   'pages.system.menu.form.updated_at': 'Updated At',
   'pages.system.menu.resource.form.basic': 'Basic Information',
   'pages.system.menu.resource.form.title': 'API Resource Configuration',
@@ -65,6 +65,7 @@ export default {
   'pages.system.role.form.status.enabled': 'Enabled',
   'pages.system.role.form.status.disabled': 'Disabled',
   'pages.system.role.form.description': 'Description',
+  'pages.system.role.form.created_at': 'Created At',
   'pages.system.role.form.updated_at': 'Updated At',
   'pages.system.role.form.basic': 'Basic Information',
   'pages.system.role.form.menu': 'Select Menu Permissions',

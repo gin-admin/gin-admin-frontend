@@ -22,7 +22,7 @@ const GlobalHeaderRight: React.FC = () => {
   return (
     <Space className={className}>
       <Avatar menu={true} />
-      <SelectLang />
+      <SelectLang className={styles.action} />
     </Space>
   );
 };

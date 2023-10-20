@@ -67,16 +67,6 @@ declare namespace API {
     parent_name?: string;
   };
 
-  enum MenuStatus {
-    Disabled = 'disabled',
-    Enabled = 'enabled',
-  }
-
-  enum MenuType {
-    Page = 'page',
-    Button = 'button',
-  }
-
   type MenuResource = {
     /** Create time */
     created_at?: string;
@@ -114,11 +104,6 @@ declare namespace API {
     statusChecked?: boolean;
   };
 
-  enum RoleStatus {
-    Disabled = 'disabled',
-    Enabled = 'enabled',
-  }
-
   type RoleMenu = {
     /** Create time */
     created_at?: string;
@@ -155,11 +140,6 @@ declare namespace API {
     updated_at?: string;
     statusChecked?: boolean;
   };
-
-  enum UserStatus {
-    Activated = 'activated',
-    Freezed = 'freezed',
-  }
 
   type UserRole = {
     /** Create time */

@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useIntl } from 'umi';
-import { message } from 'antd';
-import { ModalForm, ProFormText, ProFormTextArea, ProFormSwitch } from '@ant-design/pro-components';
+import { message, Col } from 'antd';
+import {
+  ModalForm,
+  ProFormText,
+  ProFormTextArea,
+  ProFormSwitch,
+  ProFormItem,
+} from '@ant-design/pro-components';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import RoleSelect from './RoleSelect';
 import { addUser, getUser, updateUser } from '@/services/system/user';
@@ -30,7 +36,7 @@ const UserModal: React.FC<UserModalProps> = (props: UserModalProps) => {
         if (res.data) {
           const data = res.data;
           setUserData(data);
-          data.statusChecked = data.status === API.UserStatus.Activated;
+          data.statusChecked = data.status === 'activated';
           formRef.current?.setFieldsValue(data);
         }
       });
@@ -41,10 +47,11 @@ const UserModal: React.FC<UserModalProps> = (props: UserModalProps) => {
     <ModalForm<API.User>
       visible={props.visible}
       title={props.title}
-      width={650}
+      width={800}
       formRef={formRef}
       layout="horizontal"
       grid={true}
+      rowProps={{ gutter: 20 }}
       submitTimeout={3000}
       submitter={{
         searchConfig: {
@@ -60,7 +67,7 @@ const UserModal: React.FC<UserModalProps> = (props: UserModalProps) => {
         },
       }}
       onFinish={async (values: API.User) => {
-        values.status = values.statusChecked ? API.UserStatus.Activated : API.UserStatus.Freezed;
+        values.status = values.statusChecked ? 'activated' : 'freezed';
         delete values.statusChecked;
 
         if (props.id) {
@@ -121,18 +128,22 @@ const UserModal: React.FC<UserModalProps> = (props: UserModalProps) => {
         ]}
         colProps={{ span: 12 }}
       />
-      <RoleSelect
-        name="roles"
-        label={intl.formatMessage({ id: 'pages.system.user.form.roles' })}
-        placeholder={intl.formatMessage({ id: 'pages.system.user.form.roles.placeholder' })}
-        rules={[
-          {
-            required: true,
-            message: intl.formatMessage({ id: 'pages.system.user.form.roles.required' }),
-          },
-        ]}
-        colProps={{ span: 12 }}
-      />
+      <Col span={12}>
+        <ProFormItem
+          name="roles"
+          label={intl.formatMessage({ id: 'pages.system.user.form.roles' })}
+          rules={[
+            {
+              required: true,
+              message: intl.formatMessage({ id: 'pages.system.user.form.roles.required' }),
+            },
+          ]}
+        >
+          <RoleSelect
+            placeholder={intl.formatMessage({ id: 'pages.system.user.form.roles.placeholder' })}
+          />
+        </ProFormItem>
+      </Col>
       <ProFormText
         name="email"
         label={intl.formatMessage({ id: 'pages.system.user.form.email' })}

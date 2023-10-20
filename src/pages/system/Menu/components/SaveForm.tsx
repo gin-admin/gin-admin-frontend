@@ -38,7 +38,7 @@ const MenuModal: React.FC<MenuModalProps> = (props: MenuModalProps) => {
       getMenu(props.id).then(async (res) => {
         if (res.data) {
           const data = res.data;
-          data.statusChecked = data.status === API.MenuStatus.Enabled;
+          data.statusChecked = data.status === 'enabled';
           menuFormRef.current?.setFieldsValue(data);
           resourceFormRef.current?.setFieldsValue(data);
           setFormData(data);
@@ -51,7 +51,7 @@ const MenuModal: React.FC<MenuModalProps> = (props: MenuModalProps) => {
     const menu = await menuFormRef.current?.validateFields();
     if (menu) {
       menu.parent_id = props.parentID;
-      menu.status = menu.statusChecked ? API.MenuStatus.Enabled : API.MenuStatus.Disabled;
+      menu.status = menu.statusChecked ? 'enabled' : 'disabled';
       delete menu.statusChecked;
       delete menu.parent_name;
 
@@ -75,7 +75,7 @@ const MenuModal: React.FC<MenuModalProps> = (props: MenuModalProps) => {
     <Modal
       open={props.visible}
       title={props.title}
-      width={650}
+      width={800}
       destroyOnClose
       maskClosable={false}
       okText={intl.formatMessage({ id: 'button.confirm' })}
@@ -91,9 +91,7 @@ const MenuModal: React.FC<MenuModalProps> = (props: MenuModalProps) => {
     >
       <MenuForm
         formRef={menuFormRef}
-        typeDisabled={
-          (props.parentID ? false : true) || formData?.type?.toString() === API.MenuType.Button
-        }
+        typeDisabled={(props.parentID ? false : true) || props.id ? true : false}
       />
       <ResourceForm formRef={resourceFormRef} />
     </Modal>

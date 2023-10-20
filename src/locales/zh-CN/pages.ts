@@ -1,8 +1,7 @@
 export default {
   'pages.layouts.userLayout.title':
-    '基于 GIN + GORM 2.0 + Casbin 2.0 + Wire DI 的轻量级、灵活、优雅且功能齐全的 RBAC 脚手架',
+    '基于 GIN + GORM 2.0 + Casbin 2.0 + Wire DI 的轻量级、灵活、优雅且功能齐全的 RBAC 脚手架。',
   'pages.login.accountLogin.tab': '账户密码登录',
-  'pages.login.accountLogin.errorMessage': '错误的用户名和密码',
   'pages.login.failure': '登录失败，请重试！',
   'pages.login.success': '登录成功！',
   'pages.login.username.placeholder': '用户名',
@@ -41,6 +40,7 @@ export default {
   'pages.system.menu.form.description': '描述',
   'pages.system.menu.form.properties': '属性',
   'pages.system.menu.form.parent_name': '上级菜单',
+  'pages.system.menu.form.created_at': '创建时间',
   'pages.system.menu.form.updated_at': '更新时间',
   'pages.system.menu.resource.form.basic': '基本信息',
   'pages.system.menu.resource.form.title': 'API 资源配置',
@@ -63,6 +63,7 @@ export default {
   'pages.system.role.form.status.enabled': '启用',
   'pages.system.role.form.status.disabled': '禁用',
   'pages.system.role.form.description': '描述',
+  'pages.system.role.form.created_at': '创建时间',
   'pages.system.role.form.updated_at': '更新时间',
   'pages.system.role.form.basic': '基本信息',
   'pages.system.role.form.menu': '选择菜单权限',

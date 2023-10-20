@@ -2,7 +2,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import React, { useRef, useReducer } from 'react';
 import type { ProColumns, ActionType } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Space, Tag } from 'antd';
+import { Space, Tag, message } from 'antd';
 import { useIntl } from 'umi';
 import { fetchMenu, delMenu } from '@/services/system/menu';
 import MenuModal from './components/SaveForm';
@@ -82,7 +82,7 @@ const Menu: React.FC = () => {
       title: intl.formatMessage({ id: 'pages.system.menu.form.code' }),
       dataIndex: 'code',
       ellipsis: true,
-      width: 180,
+      width: 160,
       key: 'code', // Query field name
     },
     {
@@ -92,11 +92,20 @@ const Menu: React.FC = () => {
       search: false,
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.menu.form.description' }),
-      dataIndex: 'description',
-      ellipsis: true,
-      width: 250,
+      title: intl.formatMessage({ id: 'pages.system.menu.form.type' }),
+      dataIndex: 'type',
+      width: 120,
       search: false,
+      render: (_, record) => {
+        const status = record.type;
+        return (
+          <Tag style={{ border: 0 }}>
+            {status === 'page'
+              ? intl.formatMessage({ id: 'pages.system.menu.form.type.page' })
+              : intl.formatMessage({ id: 'pages.system.menu.form.type.button' })}
+          </Tag>
+        );
+      },
     },
     {
       title: intl.formatMessage({ id: 'pages.system.menu.form.status' }),
@@ -106,13 +115,19 @@ const Menu: React.FC = () => {
       render: (_, record) => {
         const status = record.status;
         return (
-          <Tag color={status === API.MenuStatus.Enabled ? 'success' : 'error'}>
-            {status === API.MenuStatus.Enabled
+          <Tag color={status === 'enabled' ? 'success' : 'error'}>
+            {status === 'enabled'
               ? intl.formatMessage({ id: 'pages.system.menu.form.status.enabled' })
               : intl.formatMessage({ id: 'pages.system.menu.form.status.disabled' })}
           </Tag>
         );
       },
+    },
+    {
+      title: intl.formatMessage({ id: 'pages.system.menu.form.created_at' }),
+      dataIndex: 'created_at',
+      valueType: 'dateTime',
+      search: false,
     },
     {
       title: intl.formatMessage({ id: 'pages.system.menu.form.updated_at' }),
@@ -124,7 +139,7 @@ const Menu: React.FC = () => {
       title: intl.formatMessage({ id: 'pages.table.column.operation' }),
       valueType: 'option',
       key: 'option',
-      width: 120,
+      width: 130,
       render: (_, record) => (
         <Space>
           <EditIconButton
@@ -133,10 +148,10 @@ const Menu: React.FC = () => {
               dispatch({ type: ActionTypeEnum.EDIT, payload: record });
             }}
           />
-          {record.type === API.MenuType.Page && (
+          {record.type === 'page' && (
             <AddIconButton
               key="add"
-              title="添加下级"
+              title={intl.formatMessage({ id: 'pages.system.menu.button.addChild' })}
               onClick={() => {
                 dispatch({ type: ActionTypeEnum.ADD_CHILD, payload: record });
               }}
@@ -148,6 +163,7 @@ const Menu: React.FC = () => {
             onConfirm={async () => {
               const res = await delMenu(record.id!);
               if (res.success) {
+                message.success(intl.formatMessage({ id: 'component.message.success.delete' }));
                 actionRef.current?.reload();
               }
             }}
@@ -168,7 +184,7 @@ const Menu: React.FC = () => {
         search={{
           labelWidth: 'auto',
         }}
-        pagination={{ pageSize: 10, showSizeChanger: true }}
+        pagination={false}
         options={{
           density: true,
           fullScreen: true,

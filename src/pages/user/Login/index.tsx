@@ -1,39 +1,18 @@
 import { LockOutlined, UserOutlined, SafetyOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
-import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { message, Col, Row, Button } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Settings from '../../../../config/defaultSettings';
 import { history, useModel, useIntl, SelectLang, Helmet } from 'umi';
 import { getCaptchaId, getCaptchaImageURL, login } from '@/services/system/login';
 import styles from './index.less';
 import { Util, Auth } from '@/utils';
-
-const Lang = () => {
-  const langClassName = useEmotionCss(({ token }) => {
-    return {
-      width: 42,
-      height: 42,
-      lineHeight: '42px',
-      position: 'fixed',
-      right: 16,
-      borderRadius: token.borderRadius,
-      ':hover': {
-        backgroundColor: token.colorBgTextHover,
-      },
-    };
-  });
-
-  return (
-    <div className={langClassName} data-lang>
-      {SelectLang && <SelectLang />}
-    </div>
-  );
-};
+import type { ProFormInstance } from '@ant-design/pro-components';
 
 const Login: React.FC = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
   const intl = useIntl();
+  const formRef = useRef<ProFormInstance<API.LoginForm>>();
   const [captchaID, setCaptchaID] = useState('');
   const [captchaURL, setCaptchaURL] = useState('');
 
@@ -98,7 +77,7 @@ const Login: React.FC = () => {
       }
       message.error(intl.formatMessage({ id: 'pages.login.failure', defaultMessage: '登录失败' }));
     }
-
+    formRef.current?.resetFields(['captcha_code']);
     fetchCaptchaID();
   };
 
@@ -113,9 +92,12 @@ const Login: React.FC = () => {
           - {Settings.title}
         </title>
       </Helmet>
-      <Lang />
+      <div className={styles.lang} data-lang>
+        {SelectLang && <SelectLang />}
+      </div>
       <div className={styles.content}>
-        <LoginForm
+        <LoginForm<API.LoginForm>
+          formRef={formRef}
           logo={<img alt="logo" src="/logo.svg" />}
           title={Settings.title?.toString()}
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
@@ -128,8 +110,8 @@ const Login: React.FC = () => {
               submitText: intl.formatMessage({ id: 'pages.login.submit', defaultMessage: '登录' }),
             },
           }}
-          onFinish={async (values) => {
-            await handleSubmit(values as API.LoginForm);
+          onFinish={async (values: API.LoginForm) => {
+            await handleSubmit(values);
           }}
         >
           <ProFormText

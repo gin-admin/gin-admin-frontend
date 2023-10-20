@@ -23,9 +23,7 @@ const AddButton: React.FC<AddButtonProps> = (props) => {
     <>
       {show && (
         <Button icon={<PlusOutlined />} type="primary" {...props} title={undefined}>
-          {props.title
-            ? props.title
-            : intl.formatMessage({ id: 'button.add', defaultMessage: '添加' })}
+          {props.title ? props.title : intl.formatMessage({ id: 'button.add' })}
         </Button>
       )}
     </>

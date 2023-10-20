@@ -3,7 +3,7 @@ import React, { useRef, useReducer } from 'react';
 import { useIntl } from 'umi';
 import type { ProColumns, ActionType } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Space, Tag } from 'antd';
+import { Space, Tag, message } from 'antd';
 import { fetchRole, delRole } from '@/services/system/role';
 import RoleModal from './components/SaveForm';
 import { AddButton, EditIconButton, DelIconButton } from '@/components/Button';
@@ -61,49 +61,48 @@ const Role: React.FC = () => {
 
   const columns: ProColumns<API.Role>[] = [
     {
-      title: intl.formatMessage({ id: 'pages.system.role.name' }),
+      title: intl.formatMessage({ id: 'pages.system.role.form.name' }),
       dataIndex: 'name',
       ellipsis: true,
-      width: 200,
+      width: 180,
       key: 'name', // Query field name
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.role.code' }),
+      title: intl.formatMessage({ id: 'pages.system.role.form.code' }),
       dataIndex: 'code',
       width: 160,
       key: 'code', // Query field name
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.role.sequence' }),
+      title: intl.formatMessage({ id: 'pages.system.role.form.sequence' }),
       dataIndex: 'sequence',
-      width: 100,
+      width: 120,
       search: false,
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.role.description' }),
-      dataIndex: 'description',
-      ellipsis: true,
-      width: 200,
-      search: false,
-    },
-    {
-      title: intl.formatMessage({ id: 'pages.system.role.status' }),
+      title: intl.formatMessage({ id: 'pages.system.role.form.status' }),
       dataIndex: 'status',
       width: 120,
       search: false,
       render: (_, record) => {
         const status = record.status;
         return (
-          <Tag color={status === API.RoleStatus.Enabled ? 'success' : 'error'}>
-            {status === API.RoleStatus.Enabled
-              ? intl.formatMessage({ id: 'pages.system.role.status.enabled' })
-              : intl.formatMessage({ id: 'pages.system.role.status.disabled' })}
+          <Tag color={status === 'enabled' ? 'success' : 'error'}>
+            {status === 'enabled'
+              ? intl.formatMessage({ id: 'pages.system.role.form.status.enabled' })
+              : intl.formatMessage({ id: 'pages.system.role.form.status.disabled' })}
           </Tag>
         );
       },
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.role.updated_at' }),
+      title: intl.formatMessage({ id: 'pages.system.role.form.created_at' }),
+      dataIndex: 'created_at',
+      valueType: 'dateTime',
+      search: false,
+    },
+    {
+      title: intl.formatMessage({ id: 'pages.system.role.form.updated_at' }),
       dataIndex: 'updated_at',
       valueType: 'dateTime',
       search: false,
@@ -112,7 +111,7 @@ const Role: React.FC = () => {
       title: intl.formatMessage({ id: 'pages.table.column.operation' }),
       valueType: 'option',
       key: 'option',
-      width: 100,
+      width: 120,
       render: (_, record) => (
         <Space size={2}>
           <EditIconButton
@@ -127,6 +126,7 @@ const Role: React.FC = () => {
             onConfirm={async () => {
               const res = await delRole(record.id!);
               if (res.success) {
+                message.success(intl.formatMessage({ id: 'component.message.success.delete' }));
                 actionRef.current?.reload();
               }
             }}

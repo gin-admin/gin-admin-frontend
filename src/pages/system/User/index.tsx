@@ -3,7 +3,7 @@ import React, { useRef, useReducer } from 'react';
 import { useIntl } from 'umi';
 import type { ProColumns, ActionType } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Space, Tag } from 'antd';
+import { Space, Tag, message } from 'antd';
 import { fetchUser, delUser } from '@/services/system/user';
 import UserModal from './components/SaveForm';
 import { AddButton, EditIconButton, DelIconButton } from '@/components/Button';
@@ -61,72 +61,72 @@ const User: React.FC = () => {
 
   const columns: ProColumns<API.User>[] = [
     {
-      title: intl.formatMessage({ id: 'pages.system.user.username' }),
+      title: intl.formatMessage({ id: 'pages.system.user.form.username' }),
       dataIndex: 'username',
-      width: 180,
+      width: 160,
       key: 'username', // Query field name
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.user.name' }),
+      title: intl.formatMessage({ id: 'pages.system.user.form.name' }),
       dataIndex: 'name',
       ellipsis: true,
-      width: 180,
+      width: 160,
       key: 'name', // Query field name
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.user.roles' }),
+      title: intl.formatMessage({ id: 'pages.system.user.form.roles' }),
       dataIndex: 'roles',
-      width: 220,
+      width: 200,
       search: false,
       render: (_, record) => {
         return record.roles ? (
-          <>
+          <Space>
             {record.roles?.map((role) => (
               <Tag color="blue" key={role.role_id}>
                 {role.role_name}
               </Tag>
             ))}
-          </>
+          </Space>
         ) : (
           '-'
         );
       },
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.user.status' }),
+      title: intl.formatMessage({ id: 'pages.system.user.form.status' }),
       dataIndex: 'status',
-      width: 120,
+      width: 130,
       key: 'status', // Query field name
       valueType: 'select',
       valueEnum: {
-        [API.UserStatus.Activated]: {
-          text: intl.formatMessage({ id: 'pages.system.user.status.activated' }),
+        ['activated']: {
+          text: intl.formatMessage({ id: 'pages.system.user.form.status.activated' }),
           status: 'Success',
         },
-        [API.UserStatus.Freezed]: {
-          text: intl.formatMessage({ id: 'pages.system.user.status.freezed' }),
+        ['freezed']: {
+          text: intl.formatMessage({ id: 'pages.system.user.form.status.freezed' }),
           status: 'Error',
         },
       },
       render: (_, record) => {
         const status = record.status;
         return (
-          <Tag color={status === API.UserStatus.Activated ? 'success' : 'error'}>
-            {status === API.UserStatus.Activated
-              ? intl.formatMessage({ id: 'pages.system.user.status.activated' })
-              : intl.formatMessage({ id: 'pages.system.user.status.freezed' })}
+          <Tag color={status === 'activated' ? 'success' : 'error'}>
+            {status === 'activated'
+              ? intl.formatMessage({ id: 'pages.system.user.form.status.activated' })
+              : intl.formatMessage({ id: 'pages.system.user.form.status.freezed' })}
           </Tag>
         );
       },
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.user.created_at' }),
+      title: intl.formatMessage({ id: 'pages.system.user.form.created_at' }),
       dataIndex: 'created_at',
       valueType: 'dateTime',
       search: false,
     },
     {
-      title: intl.formatMessage({ id: 'pages.system.user.updated_at' }),
+      title: intl.formatMessage({ id: 'pages.system.user.form.updated_at' }),
       dataIndex: 'updated_at',
       valueType: 'dateTime',
       search: false,
@@ -135,7 +135,7 @@ const User: React.FC = () => {
       title: intl.formatMessage({ id: 'pages.table.column.operation' }),
       valueType: 'option',
       key: 'option',
-      width: 100,
+      width: 120,
       render: (_, record) => (
         <Space size={2}>
           <EditIconButton
@@ -150,6 +150,7 @@ const User: React.FC = () => {
             onConfirm={async () => {
               const res = await delUser(record.id!);
               if (res.success) {
+                message.success(intl.formatMessage({ id: 'component.message.success.delete' }));
                 actionRef.current?.reload();
               }
             }}

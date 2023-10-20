@@ -14,7 +14,7 @@ const MenuTree: React.FC<MenuTreeProps> = (props: MenuTreeProps) => {
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchMenu({ status: API.MenuStatus.Enabled }).then((res) => {
+    fetchMenu({ status: 'enabled' }).then((res) => {
       if (res.data) {
         setData(convertTreeData(res.data));
         setExpandedKeys(res.data.map((v) => v.id!));
@@ -66,16 +66,26 @@ const MenuTree: React.FC<MenuTreeProps> = (props: MenuTreeProps) => {
   };
 
   return (
-    <Tree
-      checkable
-      selectable={false}
-      checkedKeys={checkedKeys}
-      expandedKeys={expandedKeys}
-      onExpand={(keys: React.Key[]) => setExpandedKeys(keys.map((item) => item.toString()))}
-      onCheck={handleCheck}
+    <div
+      style={{
+        width: '100%',
+        maxHeight: 280,
+        overflowY: 'scroll',
+        border: '1px solid #f0f0f0',
+        padding: '15px 30px',
+      }}
     >
-      {convertTreeDataToTreeNode(data)}
-    </Tree>
+      <Tree
+        checkable
+        selectable={false}
+        checkedKeys={checkedKeys}
+        expandedKeys={expandedKeys}
+        onExpand={(keys: React.Key[]) => setExpandedKeys(keys.map((item) => item.toString()))}
+        onCheck={handleCheck}
+      >
+        {convertTreeDataToTreeNode(data)}
+      </Tree>
+    </div>
   );
 };
 

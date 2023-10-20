@@ -1,15 +1,33 @@
 import { useState, useEffect } from 'react';
-import { ProFormSelect } from '@ant-design/pro-components';
-import type { ProFormSelectProps } from '@ant-design/pro-form/lib/components/Select';
+import type { SelectProps } from 'antd';
+import { Select } from 'antd';
 import { fetchRole } from '@/services/system/role';
 
 type RoleSelectProps = {
   value?: API.UserRole[];
   onChange?: (value: API.RoleMenu[]) => void;
-} & ProFormSelectProps;
+} & SelectProps;
 
 const RoleSelect: React.FC<RoleSelectProps> = (props) => {
+  const [options, setOptions] = useState<SelectProps['options']>([]);
   const [values, setValues] = useState<string[]>([]);
+
+  useEffect(() => {
+    const request = async (params: API.PaginationParam) => {
+      const res = await fetchRole(params);
+      if (res.data) {
+        return res.data.map((item) => {
+          return { label: item.name, value: item.id };
+        });
+      } else {
+        return [];
+      }
+    };
+
+    request({ status: 'enabled', resultType: 'select' }).then((data) => {
+      setOptions(data);
+    });
+  }, []);
 
   useEffect(() => {
     if (props.value) {
@@ -19,37 +37,23 @@ const RoleSelect: React.FC<RoleSelectProps> = (props) => {
     }
   }, [props.value]);
 
-  const request = async (params: API.PaginationParam) => {
-    const res = await fetchRole(params);
-    if (res.data) {
-      return res.data.map((item) => {
-        return { label: item.name, value: item.id };
-      });
-    } else {
-      return [];
-    }
-  };
-
   return (
-    <ProFormSelect
+    <Select
       allowClear={false}
       showSearch
       mode="tags"
       {...props}
-      request={request}
-      params={{ resultType: 'select', status: 'enabled' }}
-      fieldProps={{
-        value: values,
-        onChange: (value: string[]) => {
-          setValues(value);
-          if (props.onChange) {
-            props.onChange(
-              value.map((item) => {
-                return { role_id: item };
-              }),
-            );
-          }
-        },
+      options={options}
+      value={values}
+      onChange={(value: string[]) => {
+        setValues(value);
+        if (props.onChange) {
+          props.onChange(
+            value.map((item) => {
+              return { role_id: item };
+            }),
+          );
+        }
       }}
     />
   );

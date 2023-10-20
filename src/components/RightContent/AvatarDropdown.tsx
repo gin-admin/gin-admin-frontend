@@ -79,7 +79,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
             icon: <UserOutlined />,
             label: intl.formatMessage({
               id: 'component.RightContent.profile',
-              defaultMessage: '个人中心',
+              defaultMessage: '个人设置',
             }),
           },
           {

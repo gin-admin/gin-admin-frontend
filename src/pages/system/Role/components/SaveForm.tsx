@@ -37,7 +37,7 @@ const RoleModal: React.FC<RoleModalProps> = (props: RoleModalProps) => {
         if (res.data) {
           const data = res.data;
           setRoleData(data);
-          data.statusChecked = data.status === API.RoleStatus.Enabled;
+          data.statusChecked = data.status === 'enabled';
           formRef.current?.setFieldsValue(data);
         }
       });
@@ -67,7 +67,7 @@ const RoleModal: React.FC<RoleModalProps> = (props: RoleModalProps) => {
         },
       }}
       onFinish={async (values: API.Role) => {
-        values.status = values.statusChecked ? API.RoleStatus.Enabled : API.RoleStatus.Disabled;
+        values.status = values.statusChecked ? 'enabled' : 'disabled';
         delete values.statusChecked;
 
         if (!values.menus || values.menus.length === 0) {
@@ -99,7 +99,10 @@ const RoleModal: React.FC<RoleModalProps> = (props: RoleModalProps) => {
       }}
       initialValues={{ sequence: 0, statusChecked: true }}
     >
-      <ProForm.Group title={intl.formatMessage({ id: 'pages.system.role.form.basic' })}>
+      <ProForm.Group
+        title={intl.formatMessage({ id: 'pages.system.role.form.basic' })}
+        rowProps={{ gutter: 20 }}
+      >
         <ProFormText
           name="name"
           label={intl.formatMessage({ id: 'pages.system.role.form.name' })}
@@ -127,13 +130,14 @@ const RoleModal: React.FC<RoleModalProps> = (props: RoleModalProps) => {
         <ProFormTextArea
           name="description"
           label={intl.formatMessage({ id: 'pages.system.menu.form.description' })}
-          fieldProps={{ rows: 2 }}
+          fieldProps={{ rows: 1 }}
           colProps={{ span: 24 }}
         />
         <ProFormDigit
           name="sequence"
           label={intl.formatMessage({ id: 'pages.system.role.form.sequence' })}
           colProps={{ span: 12 }}
+          wrapperCol={{ span: 12 }}
         />
         <ProFormSwitch
           name="statusChecked"
@@ -145,10 +149,7 @@ const RoleModal: React.FC<RoleModalProps> = (props: RoleModalProps) => {
           colProps={{ span: 12 }}
         />
       </ProForm.Group>
-      <ProForm.Group
-        title={intl.formatMessage({ id: 'pages.system.role.form.menu' })}
-        style={{ paddingLeft: 35, paddingRight: 35, maxHeight: 280, overflowY: 'scroll' }}
-      >
+      <ProForm.Group title={intl.formatMessage({ id: 'pages.system.role.form.menu' })}>
         <ProForm.Item name="menus" noStyle>
           <MenuTree />
         </ProForm.Item>

@@ -1,8 +1,14 @@
 import { PageContainer } from '@ant-design/pro-components';
 import React, { useRef } from 'react';
 import { useIntl, useModel } from 'umi';
-import { Tabs, message } from 'antd';
-import { ProForm, ProFormText, ProFormSwitch, ProFormTextArea } from '@ant-design/pro-components';
+import { Tabs, message, Col, Row, Space } from 'antd';
+import {
+  ProForm,
+  ProFormText,
+  ProFormSwitch,
+  ProFormTextArea,
+  ProFormItem,
+} from '@ant-design/pro-components';
 import RoleSelect from '@/pages/system/User/components/RoleSelect';
 import { updateCurrentUser, updateCurrentPassword } from '@/services/system/login';
 import { Util } from '@/utils';
@@ -25,18 +31,34 @@ const Profile: React.FC = () => {
 
   return (
     <PageContainer>
-      <Tabs tabPosition="left" defaultActiveKey="profile" type="card" destroyInactiveTabPane>
+      <Tabs
+        tabPosition="left"
+        defaultActiveKey="profile"
+        style={{ background: '#fff', paddingTop: 25, paddingBottom: 50 }}
+      >
         <Tabs.TabPane
           style={{ justifyContent: 'center' }}
           tab={intl.formatMessage({ id: 'pages.user.profile.tab.basic' })}
           key="basic"
         >
           <ProForm<API.User>
-            style={{ width: 450 }}
+            style={{ width: 500 }}
             layout="horizontal"
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 16 }}
             submitter={{
               searchConfig: {
-                submitText: intl.formatMessage({ id: 'button.confirm' }),
+                submitText: intl.formatMessage({ id: 'button.save' }),
+                resetText: '',
+              },
+              render: (props, doms) => {
+                return (
+                  <Row>
+                    <Col span={14} offset={6}>
+                      <Space>{doms}</Space>
+                    </Col>
+                  </Row>
+                );
               },
             }}
             initialValues={initialState?.currentUser}
@@ -62,11 +84,14 @@ const Profile: React.FC = () => {
               label={intl.formatMessage({ id: 'pages.system.user.form.name' })}
               disabled
             />
-            <RoleSelect
-              name="roles"
-              label={intl.formatMessage({ id: 'pages.system.user.form.roles' })}
-              disabled
-            />
+            <Col span={24}>
+              <ProFormItem
+                name="roles"
+                label={intl.formatMessage({ id: 'pages.system.user.form.roles' })}
+              >
+                <RoleSelect placeholder="" disabled />
+              </ProFormItem>
+            </Col>
             <ProFormText
               name="email"
               label={intl.formatMessage({ id: 'pages.system.user.form.email' })}
@@ -104,11 +129,23 @@ const Profile: React.FC = () => {
         >
           <ProForm<API.UpdateLoginPassword>
             formRef={securityFormRef}
-            style={{ width: 450 }}
+            style={{ width: 500 }}
             layout="horizontal"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
             submitter={{
               searchConfig: {
                 submitText: intl.formatMessage({ id: 'button.confirm' }),
+                resetText: '',
+              },
+              render: (props, doms) => {
+                return (
+                  <Row>
+                    <Col span={14} offset={6}>
+                      <Space>{doms}</Space>
+                    </Col>
+                  </Row>
+                );
               },
             }}
             initialValues={initialState?.currentUser}

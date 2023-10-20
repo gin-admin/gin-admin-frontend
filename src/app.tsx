@@ -10,6 +10,7 @@ import { Auth } from '@/utils';
 import { getCurrentUser, fetchCurrentMenus } from '@/services/system/login';
 import { getFlatMenus, transformRoute } from '@umijs/route-utils';
 import routes from '../config/routes';
+import { patchRoutes } from '@/.umi/plugin-layout/runtime';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -20,7 +21,6 @@ export const initialStateConfig = {
 
 export const request: RequestConfig = {
   timeout: 60000,
-  prefix: '/api',
   errorConfig: {
     adaptor: (resData, ctx) => {
       const { success, error } = resData;
@@ -109,6 +109,9 @@ export async function getInitialState(): Promise<InitialStateProps> {
     try {
       const userRes = await getCurrentUser();
       const currentUser = userRes.data;
+      if (currentUser) {
+        currentUser.statusChecked = currentUser?.status === 'activated';
+      }
       let flatMenus: Record<string, MenuDataItem> = {};
       try {
         const menus = await fetchCurrentMenus();
@@ -206,18 +209,18 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       },
       request: async () => {
         const data = loopMenuItems(transformRoute(routes).menuData);
-        return data || [];
+        return patchRoutes(data as any);
       },
     },
     links: isDev
       ? [
           <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
             <LinkOutlined />
-            <span>OpenAPI Document</span>
+            <span>OpenAPI</span>
           </Link>,
           <Link to="/~docs" key="docs">
             <BookOutlined />
-            <span>Components Document</span>
+            <span>Components</span>
           </Link>,
         ]
       : [],

@@ -5,7 +5,7 @@ export default {
   'menu.system.menu': '菜单管理',
   'menu.system.user': '用户管理',
   'menu.system.role': '角色管理',
-  'menu.account.center': '个人中心',
+  'menu.account.settings': '个人设置',
   'menu.login': '登录',
   'menu.register': '注册',
   'menu.dashboard': 'Dashboard',
@@ -24,7 +24,6 @@ export default {
   'menu.exception.server-error': '500',
   'menu.exception.trigger': '触发错误',
   'menu.account': '个人页',
-  'menu.account.settings': '个人设置',
   'menu.account.trigger': '触发报错',
   'menu.account.logout': '退出登录',
 };

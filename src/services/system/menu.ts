@@ -7,8 +7,6 @@ export async function fetchMenu(params: API.PaginationParam, options?: { [key: s
   return request<API.ResponseResult<API.Menu[]>>('/api/v1/menus', {
     method: 'GET',
     params: {
-      current: '1',
-      pageSize: '10',
       ...params,
     },
     ...(options || {}),
