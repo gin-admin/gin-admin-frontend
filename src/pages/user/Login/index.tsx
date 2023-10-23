@@ -41,6 +41,8 @@ const Login: React.FC = () => {
   };
 
   const handleSubmit = async (values: API.LoginForm) => {
+    let errMsg = intl.formatMessage({ id: 'pages.login.failure', defaultMessage: '登录失败' });
+
     try {
       values.captcha_id = captchaID;
       values.password = Util.md5(values.password);
@@ -66,16 +68,17 @@ const Login: React.FC = () => {
         history.push(redirect || '/');
         return;
       }
+
       if (result.error) {
-        console.error(result.error?.detail || '');
+        errMsg = result.error?.detail || '';
       }
-      message.error(intl.formatMessage({ id: 'pages.login.failure', defaultMessage: '登录失败' }));
+      message.error(errMsg);
     } catch (error) {
       const e = error as { data: API.ResponseResult<any> };
       if (e.data.error) {
-        console.error(e.data.error?.detail || '');
+        errMsg = e.data.error?.detail || '';
       }
-      message.error(intl.formatMessage({ id: 'pages.login.failure', defaultMessage: '登录失败' }));
+      message.error(errMsg);
     }
     formRef.current?.resetFields(['captcha_code']);
     fetchCaptchaID();

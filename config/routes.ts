@@ -48,6 +48,12 @@
         name: 'user',
         component: './system/User',
       },
+      {
+        path: '/system/logger',
+        code: 'logger',
+        name: 'logger',
+        component: './system/Logger',
+      },
     ],
   },
   {

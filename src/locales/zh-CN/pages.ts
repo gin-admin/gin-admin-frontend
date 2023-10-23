@@ -94,6 +94,13 @@ export default {
   'pages.system.user.form.status.freezed': '冻结',
   'pages.system.user.form.created_at': '创建时间',
   'pages.system.user.form.updated_at': '更新时间',
+  // logger
+  'pages.system.logger.form.level': '日志级别',
+  'pages.system.logger.form.trace_id': '访问 ID',
+  'pages.system.logger.form.tag': '标签',
+  'pages.system.logger.form.message': '日志内容',
+  'pages.system.logger.form.user_name': '用户名称',
+  'pages.system.logger.form.created_at': '创建时间',
   // profile
   'pages.user.profile.tab.basic': '基本信息',
   'pages.user.profile.tab.security': '安全设置',

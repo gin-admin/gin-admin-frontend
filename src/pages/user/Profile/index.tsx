@@ -1,15 +1,8 @@
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProFormItem } from '@ant-design/pro-components';
 import React, { useRef } from 'react';
 import { useIntl, useModel } from 'umi';
-import { Tabs, message, Col, Row, Space } from 'antd';
-import {
-  ProForm,
-  ProFormText,
-  ProFormSwitch,
-  ProFormTextArea,
-  ProFormItem,
-} from '@ant-design/pro-components';
-import RoleSelect from '@/pages/system/User/components/RoleSelect';
+import { Tabs, message, Col, Row, Space, Tag } from 'antd';
+import { ProForm, ProFormText, ProFormSwitch, ProFormTextArea } from '@ant-design/pro-components';
 import { updateCurrentUser, updateCurrentPassword } from '@/services/system/login';
 import { Util } from '@/utils';
 import type { ProFormInstance } from '@ant-design/pro-components';
@@ -30,7 +23,7 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer title={intl.formatMessage({ id: 'menu.account.settings' })}>
       <Tabs
         tabPosition="left"
         defaultActiveKey="profile"
@@ -79,19 +72,23 @@ const Profile: React.FC = () => {
               label={intl.formatMessage({ id: 'pages.system.user.form.username' })}
               disabled
             />
+            {initialState?.currentUser?.roles?.length === 0 && (
+              <Col span={24}>
+                <ProFormItem label={intl.formatMessage({ id: 'pages.system.user.form.roles' })}>
+                  <Space wrap>
+                    {initialState?.currentUser?.roles?.map((role) => (
+                      <Tag color="processing" key={role.id}>
+                        {role.role_name}
+                      </Tag>
+                    ))}
+                  </Space>
+                </ProFormItem>
+              </Col>
+            )}
             <ProFormText
               name="name"
               label={intl.formatMessage({ id: 'pages.system.user.form.name' })}
-              disabled
             />
-            <Col span={24}>
-              <ProFormItem
-                name="roles"
-                label={intl.formatMessage({ id: 'pages.system.user.form.roles' })}
-              >
-                <RoleSelect placeholder="" disabled />
-              </ProFormItem>
-            </Col>
             <ProFormText
               name="email"
               label={intl.formatMessage({ id: 'pages.system.user.form.email' })}

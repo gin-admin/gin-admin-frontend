@@ -64,7 +64,7 @@ const Role: React.FC = () => {
       title: intl.formatMessage({ id: 'pages.system.role.form.name' }),
       dataIndex: 'name',
       ellipsis: true,
-      width: 180,
+      width: 160,
       key: 'name', // Query field name
     },
     {
@@ -82,7 +82,7 @@ const Role: React.FC = () => {
     {
       title: intl.formatMessage({ id: 'pages.system.role.form.status' }),
       dataIndex: 'status',
-      width: 120,
+      width: 130,
       search: false,
       render: (_, record) => {
         const status = record.status;
@@ -100,18 +100,20 @@ const Role: React.FC = () => {
       dataIndex: 'created_at',
       valueType: 'dateTime',
       search: false,
+      width: 180,
     },
     {
       title: intl.formatMessage({ id: 'pages.system.role.form.updated_at' }),
       dataIndex: 'updated_at',
       valueType: 'dateTime',
       search: false,
+      width: 180,
     },
     {
       title: intl.formatMessage({ id: 'pages.table.column.operation' }),
       valueType: 'option',
       key: 'option',
-      width: 120,
+      width: 130,
       render: (_, record) => (
         <Space size={2}>
           <EditIconButton

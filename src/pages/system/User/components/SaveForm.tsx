@@ -11,6 +11,7 @@ import {
 import type { ProFormInstance } from '@ant-design/pro-components';
 import RoleSelect from './RoleSelect';
 import { addUser, getUser, updateUser } from '@/services/system/user';
+import { Util } from '@/utils';
 
 type UserModalProps = {
   onSuccess: () => void;
@@ -69,6 +70,7 @@ const UserModal: React.FC<UserModalProps> = (props: UserModalProps) => {
       onFinish={async (values: API.User) => {
         values.status = values.statusChecked ? 'activated' : 'freezed';
         delete values.statusChecked;
+        values.password = values.password ? Util.md5(values.password) : undefined;
 
         if (props.id) {
           if (userData?.roles) {
@@ -112,7 +114,7 @@ const UserModal: React.FC<UserModalProps> = (props: UserModalProps) => {
         placeholder={
           props.id
             ? intl.formatMessage({ id: 'pages.system.user.form.password.update.placeholder' })
-            : intl.formatMessage({ id: 'pages.system.user.form.username.placeholder' })
+            : intl.formatMessage({ id: 'pages.system.user.form.password.placeholder' })
         }
         colProps={{ span: 12 }}
       />

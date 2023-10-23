@@ -124,18 +124,20 @@ const User: React.FC = () => {
       dataIndex: 'created_at',
       valueType: 'dateTime',
       search: false,
+      width: 180,
     },
     {
       title: intl.formatMessage({ id: 'pages.system.user.form.updated_at' }),
       dataIndex: 'updated_at',
       valueType: 'dateTime',
       search: false,
+      width: 180,
     },
     {
       title: intl.formatMessage({ id: 'pages.table.column.operation' }),
       valueType: 'option',
       key: 'option',
-      width: 120,
+      width: 130,
       render: (_, record) => (
         <Space size={2}>
           <EditIconButton

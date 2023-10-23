@@ -96,6 +96,13 @@ export default {
   'pages.system.user.form.status.freezed': 'Freezed',
   'pages.system.user.form.created_at': 'Created At',
   'pages.system.user.form.updated_at': 'Updated At',
+  // logger
+  'pages.system.logger.form.level': 'Level',
+  'pages.system.logger.form.message': 'Message',
+  'pages.system.logger.form.trace_id': 'Trace ID',
+  'pages.system.logger.form.tag': 'Tag',
+  'pages.system.logger.form.user_name': 'User Name',
+  'pages.system.logger.form.created_at': 'Created At',
   // profile
   'pages.user.profile.tab.basic': 'Basic Information',
   'pages.user.profile.tab.security': 'Security Settings',

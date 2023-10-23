@@ -88,7 +88,7 @@ const Menu: React.FC = () => {
     {
       title: intl.formatMessage({ id: 'pages.system.menu.form.sequence' }),
       dataIndex: 'sequence',
-      width: 100,
+      width: 120,
       search: false,
     },
     {
@@ -110,7 +110,7 @@ const Menu: React.FC = () => {
     {
       title: intl.formatMessage({ id: 'pages.system.menu.form.status' }),
       dataIndex: 'status',
-      width: 120,
+      width: 130,
       search: false,
       render: (_, record) => {
         const status = record.status;
@@ -128,12 +128,14 @@ const Menu: React.FC = () => {
       dataIndex: 'created_at',
       valueType: 'dateTime',
       search: false,
+      width: 180,
     },
     {
       title: intl.formatMessage({ id: 'pages.system.menu.form.updated_at' }),
       dataIndex: 'updated_at',
       valueType: 'dateTime',
       search: false,
+      width: 180,
     },
     {
       title: intl.formatMessage({ id: 'pages.table.column.operation' }),

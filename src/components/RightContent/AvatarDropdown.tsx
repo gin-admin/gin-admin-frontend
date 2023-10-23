@@ -15,8 +15,13 @@ export type GlobalHeaderRightProps = {
 };
 
 const loginOut = () => {
-  Auth.removeToken();
-  logout();
+  logout()
+    .then(() => {
+      Auth.removeToken();
+    })
+    .catch(() => {
+      Auth.removeToken();
+    });
   const { query = {}, search, pathname } = history.location;
   const { redirect } = query;
   // Note: There may be security issues, please note

@@ -136,6 +136,7 @@ declare namespace API {
     roles?: UserRole[];
     /** Status of user (activated, freezed) */
     status?: string;
+    password?: string;
     /** Update time */
     updated_at?: string;
     statusChecked?: boolean;
@@ -154,5 +155,29 @@ declare namespace API {
     updated_at?: string;
     /** From User.ID */
     user_id?: string;
+  };
+
+  type Logger = {
+    /** Create time */
+    created_at?: string;
+    /** Log data */
+    data?: string;
+    /** Unique ID */
+    id?: string;
+    /** Log level */
+    level?: string;
+    /** Log message */
+    message?: string;
+    /** Error stack */
+    stack?: string;
+    /** Log tag */
+    tag?: string;
+    /** Trace ID */
+    trace_id?: string;
+    /** User ID */
+    user_id?: string;
+    /** From User.Name */
+    user_name?: string;
+    login_name?: string;
   };
 }
