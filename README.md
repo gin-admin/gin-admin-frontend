@@ -13,8 +13,8 @@
 - :gem: **Neat Design**: Follow Ant Design specification
 - :triangular_ruler: **Common Templates**: Typical templates for enterprise applications
 - :rocket: **State of The Art Development**: Newest development stack of React/umi/dva/antd
-- :location_on: **International**: Built-in i18n solution
-- :guardsman: **RBAC**: Support rbac permission management
+- :cn: **International**: Built-in i18n solution
+- :closed_lock_with_key: **RBAC**: Support rbac permission management
 
 ## Environment Prepare
 
