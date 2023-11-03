@@ -4,7 +4,7 @@
 
 ![gin-admin-frontend](./demo.png)
 
-- [Preview](https://gin-admin.github.io/gin-admin-frontend)
+- [Preview](http://101.42.232.163:8040)
   - Username: admin
   - Password: abc-123
 

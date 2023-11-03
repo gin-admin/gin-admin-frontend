@@ -217,7 +217,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       },
       request: async () => {
         const data = loopMenuItems(transformRoute(routes).menuData);
-        console.log(data);
         patchRoutes({ routes: data });
         return data;
       },
