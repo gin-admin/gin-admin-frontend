@@ -7,4 +7,5 @@ export default {
   'component.message.success.save': 'Save successfully',
   'component.message.error.save': 'Failed to save',
   'component.message.success.delete': 'Delete successfully',
+  'pages.table.column.operation': '操作',
 };

@@ -44,10 +44,10 @@ const Logger: React.FC = () => {
     {
       title: intl.formatMessage({ id: 'pages.system.logger.form.user_name' }),
       dataIndex: 'user_name',
-      width: 180,
+      width: 160,
       key: 'userName', // Query field name
       render: (_, record) => {
-        return record.user_name ? `${record.user_name}(${record.login_name})` : '-';
+        return record.user_name ? `${record.user_name}(${record.login_name})` : `${record.user_id}`;
       },
     },
     {

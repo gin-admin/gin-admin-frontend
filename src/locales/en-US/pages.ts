@@ -15,10 +15,13 @@ export default {
   'pages.login.submit': 'Login',
   'pages.login.loginWith': 'Login with :',
   'pages.login.registerAccount': 'Register Account',
+  // welcome
   'pages.welcome.link': 'Welcome',
   'pages.welcome.alertMessage':
     'A more concise, efficient, and modular golang admin service has been released.',
-  'pages.table.column.operation': 'Operation',
+  'pages.welcome.quickStart': 'Quick Start',
+  'pages.welcome.generate': 'Generate Struct',
+  'pages.welcome.remove': 'Remove Struct',
   // menu
   'pages.system.menu.add': 'Add Menu',
   'pages.system.menu.edit': 'Edit Menu',

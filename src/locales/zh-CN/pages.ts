@@ -15,9 +15,12 @@ export default {
   'pages.login.submit': '登录',
   'pages.login.loginWith': '其他登录方式 :',
   'pages.login.registerAccount': '注册账户',
+  // welcome
   'pages.welcome.link': '欢迎使用',
   'pages.welcome.alertMessage': '更加简洁、高效、模块化的 Golang Admin 服务，已经发布。',
-  'pages.table.column.operation': '操作',
+  'pages.welcome.quickStart': '快速开始',
+  'pages.welcome.generate': '生成结构体',
+  'pages.welcome.remove': '删除结构体',
   // menu
   'pages.system.menu.add': '添加菜单',
   'pages.system.menu.edit': '编辑菜单',

@@ -8,6 +8,7 @@ import { getCaptchaId, getCaptchaImageURL, login } from '@/services/system/login
 import styles from './index.less';
 import { Util, Auth } from '@/utils';
 import type { ProFormInstance } from '@ant-design/pro-components';
+import { HOST } from '@/services';
 
 const Login: React.FC = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
@@ -190,7 +191,11 @@ const Login: React.FC = () => {
                 }}
               >
                 {captchaURL && (
-                  <img src={captchaURL} alt="" style={{ width: '100%', height: '100%' }} />
+                  <img
+                    src={`${HOST}${captchaURL}`}
+                    alt=""
+                    style={{ width: '100%', height: '100%' }}
+                  />
                 )}
               </Button>
             </Col>

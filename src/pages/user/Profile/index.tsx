@@ -182,7 +182,7 @@ const Profile: React.FC = () => {
               ]}
             />
             <ProFormText.Password
-              name="password"
+              name="new_password"
               label={intl.formatMessage({
                 id: 'pages.user.profile.tab.security.form.password',
               })}

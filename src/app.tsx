@@ -11,6 +11,7 @@ import { getCurrentUser, fetchCurrentMenus } from '@/services/system/login';
 import { getFlatMenus, transformRoute } from '@umijs/route-utils';
 import routes from '../config/routes';
 import { patchRoutes } from '@/.umi/plugin-layout/runtime';
+import { HOST } from '@/services';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -46,6 +47,10 @@ export const request: RequestConfig = {
   middlewares: [],
   requestInterceptors: [
     (url, options) => {
+      let targetURL = url;
+      if (url.startsWith('/api/')) {
+        targetURL = `${HOST}${url}`;
+      }
       const token = Auth.getToken();
       if (token) {
         const headers = {
@@ -53,12 +58,12 @@ export const request: RequestConfig = {
           Authorization: `${Auth.getTokenType()} ${token}`,
         };
         return {
-          url,
+          url: targetURL,
           options: { ...options, headers },
         };
       }
       return {
-        url,
+        url: targetURL,
         options,
       };
     },
@@ -183,14 +188,17 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       }
 
       const code = initialState.routePathCodeMap[menu.path];
-      if (initialState.flatMenus.hasOwnProperty(code)) {
+      if (code && initialState.flatMenus.hasOwnProperty(code)) {
         const menuItem: MenuDataItem = {
           ...menu,
-          children: loopMenuItems(menu.children),
         };
+        const children = loopMenuItems(menu.children);
+        menuItem.children = children;
+        menuItem.routes = children;
         result.push(menuItem);
       }
     });
+    console.log(result);
     return result;
   };
 
@@ -209,6 +217,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       },
       request: async () => {
         const data = loopMenuItems(transformRoute(routes).menuData);
+        console.log(data);
         patchRoutes({ routes: data });
         return data;
       },
