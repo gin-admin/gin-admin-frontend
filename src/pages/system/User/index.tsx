@@ -142,12 +142,14 @@ const User: React.FC = () => {
         <Space size={2}>
           <EditIconButton
             key="edit"
+            code="edit"
             onClick={() => {
               dispatch({ type: ActionTypeEnum.EDIT, payload: record });
             }}
           />
           <DelIconButton
             key="delete"
+            code="delete"
             title={delTip}
             onConfirm={async () => {
               const res = await delUser(record.id!);
@@ -183,6 +185,7 @@ const User: React.FC = () => {
         toolBarRender={() => [
           <AddButton
             key="add"
+            code="add"
             onClick={() => {
               dispatch({ type: ActionTypeEnum.ADD });
             }}

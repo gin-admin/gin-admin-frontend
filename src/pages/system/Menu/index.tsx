@@ -146,6 +146,7 @@ const Menu: React.FC = () => {
         <Space>
           <EditIconButton
             key="edit"
+            code="edit"
             onClick={() => {
               dispatch({ type: ActionTypeEnum.EDIT, payload: record });
             }}
@@ -153,6 +154,7 @@ const Menu: React.FC = () => {
           {record.type === 'page' && (
             <AddIconButton
               key="add"
+              code="add"
               title={intl.formatMessage({ id: 'pages.system.menu.button.addChild' })}
               onClick={() => {
                 dispatch({ type: ActionTypeEnum.ADD_CHILD, payload: record });
@@ -161,6 +163,7 @@ const Menu: React.FC = () => {
           )}
           <DelIconButton
             key="delete"
+            code="delete"
             title={delTip}
             onConfirm={async () => {
               const res = await delMenu(record.id!);
@@ -196,6 +199,7 @@ const Menu: React.FC = () => {
         toolBarRender={() => [
           <AddButton
             key="add"
+            code="add"
             onClick={() => {
               dispatch({ type: ActionTypeEnum.ADD });
             }}

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   PlusOutlined,
   PlusCircleOutlined,
@@ -11,14 +12,14 @@ import { Button, Tooltip, Popconfirm } from 'antd';
 import type { ButtonProps, PopconfirmProps } from 'antd';
 import { useRouteMatch, useModel, useIntl } from 'umi';
 
-export type AddButtonProps = ButtonProps;
+export type AddButtonProps = ButtonProps & { code: string };
 
 const AddButton: React.FC<AddButtonProps> = (props) => {
   const { initialState } = useModel('@@initialState');
   const intl = useIntl();
   const match = useRouteMatch();
   const code = initialState!.routePathCodeMap![match.path];
-  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.add`);
+  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.${props.code}`);
   return (
     <>
       {show && (
@@ -29,14 +30,14 @@ const AddButton: React.FC<AddButtonProps> = (props) => {
     </>
   );
 };
-export type AddIconButtonProps = ButtonProps;
+export type AddIconButtonProps = ButtonProps & { code: string };
 
 const AddIconButton: React.FC<AddIconButtonProps> = (props) => {
   const { initialState } = useModel('@@initialState');
   const intl = useIntl();
   const match = useRouteMatch();
   const code = initialState!.routePathCodeMap![match.path];
-  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.add`);
+  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.${props.code}`);
 
   return (
     <>
@@ -65,14 +66,14 @@ const AddIconButton: React.FC<AddIconButtonProps> = (props) => {
 
 export type DelIconButtonProps = {
   buttonProps?: ButtonProps;
-} & PopconfirmProps;
+} & PopconfirmProps & { code: string };
 
 const DelIconButton: React.FC<DelIconButtonProps> = (props) => {
   const { initialState } = useModel('@@initialState');
   const match = useRouteMatch();
   const intl = useIntl();
   const code = initialState!.routePathCodeMap![match.path];
-  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.delete`);
+  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.${props.code}`);
 
   return (
     <>
@@ -111,14 +112,14 @@ const DelIconButton: React.FC<DelIconButtonProps> = (props) => {
 
 export type EditIconButtonProps = {
   icon?: React.ReactNode;
-} & ButtonProps;
+} & ButtonProps & { code: string };
 
 const EditIconButton: React.FC<EditIconButtonProps> = (props) => {
   const { initialState } = useModel('@@initialState');
   const intl = useIntl();
   const match = useRouteMatch();
   const code = initialState!.routePathCodeMap![match.path];
-  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.edit`);
+  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.${props.code}`);
 
   return (
     <>
@@ -144,14 +145,14 @@ const EditIconButton: React.FC<EditIconButtonProps> = (props) => {
     </>
   );
 };
-export type ExportButtonProps = ButtonProps;
+export type ExportButtonProps = ButtonProps & { code: string };
 
 const ExportButton: React.FC<ExportButtonProps> = (props) => {
   const { initialState } = useModel('@@initialState');
   const intl = useIntl();
   const match = useRouteMatch();
   const code = initialState!.routePathCodeMap![match.path];
-  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.export`);
+  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.${props.code}`);
 
   return (
     <>
@@ -165,14 +166,14 @@ const ExportButton: React.FC<ExportButtonProps> = (props) => {
     </>
   );
 };
-export type ImportButtonProps = ButtonProps;
+export type ImportButtonProps = ButtonProps & { code: string };
 
 const ImportButton: React.FC<ImportButtonProps> = (props) => {
   const { initialState } = useModel('@@initialState');
   const intl = useIntl();
   const match = useRouteMatch();
   const code = initialState!.routePathCodeMap![match.path];
-  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.import`);
+  const show = initialState!.flatMenus!.hasOwnProperty(`${code}.${props.code}`);
 
   return (
     <>
