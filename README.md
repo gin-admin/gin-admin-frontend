@@ -4,10 +4,6 @@
 
 ![gin-admin-frontend](./demo.png)
 
-- [Preview](http://101.42.232.163:8040)
-  - Username: admin
-  - Password: abc-123
-
 ## Features
 
 - :gem: **Neat Design**: Follow Ant Design specification

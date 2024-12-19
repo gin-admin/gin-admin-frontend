@@ -106,7 +106,8 @@ const Login: React.FC = () => {
           title={Settings.title?.toString()}
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
-            login_name: Util.getUsername(),
+            username: 'admin',
+            password: 'abc-123',
           }}
           actions={null}
           submitter={{
