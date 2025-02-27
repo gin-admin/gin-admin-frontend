@@ -11,7 +11,19 @@ const Footer: React.FC = () => {
     defaultMessage: 'LyricTian',
   });
 
-  return <DefaultFooter copyright={`${currentYear} ${produced}`} />;
+  return (
+    <DefaultFooter
+      copyright={`${currentYear} ${produced}`}
+      links={[
+        {
+          key: 'icp',
+          title: '鲁ICP备2022031242号-2',
+          href: 'https://beian.miit.gov.cn/',
+          blankTarget: true,
+        },
+      ]}
+    />
+  );
 };
 
 export default Footer;

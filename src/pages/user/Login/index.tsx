@@ -1,6 +1,6 @@
 import { LockOutlined, UserOutlined, SafetyOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
-import { message, Col, Row, Button } from 'antd';
+import { message, Col, Row, Button, Typography } from 'antd';
 import React, { useState, useEffect, useRef } from 'react';
 import Settings from '../../../../config/defaultSettings';
 import { history, useModel, useIntl, SelectLang, Helmet } from 'umi';
@@ -9,6 +9,7 @@ import styles from './index.less';
 import { Util, Auth } from '@/utils';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { HOST } from '@/services';
+import Footer from '@/components/Footer';
 
 const Login: React.FC = () => {
   const { initialState, setInitialState } = useModel('@@initialState');
@@ -203,6 +204,7 @@ const Login: React.FC = () => {
           </Row>
         </LoginForm>
       </div>
+      <Footer />
     </div>
   );
 };
